@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Task Dashboard</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=manrope:400,500,600,700|space+grotesk:500,700,800" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/tasks-dashboard.css') }}">
 
 </head>
@@ -25,22 +25,34 @@
             @endphp
 
             <header class="hero">
-                <div class="hero-top">
-                    <div>
-                        <div class="eyebrow">Qtec technical assessment</div>
-                        <h1>Task management dashboard</h1>
+                <div class="hero-grid">
+                    <div class="hero-copy">
+                        <div class="eyebrow">Qtec Solution Limited</div>
+                        <h1>Team Task Management System</h1>
                         <p>
-                            A clean and intuitive interface to create, update, and remove tasks, with status tracking,
-                            filters, and pagination. The page uses your existing service and repository layer through a
-                            dedicated dashboard controller.
+                            Centralize daily execution with a clear operational board. Create tasks, update progress,
+                            track priorities, and keep delivery visible across the team with fast filters and clean
+                            workflows.
                         </p>
                     </div>
 
-                    <div class="stats">
-                        <div class="stat"><strong>{{ $tasks->total() }}</strong><span>Total matching</span></div>
-                        <div class="stat"><strong>{{ $activeCount }}</strong><span>Open on page</span></div>
-                        <div class="stat"><strong>{{ $doneCount }}</strong><span>Completed on page</span></div>
+                    <div class="brand-panel" aria-label="Qtec brand panel">
+                        <div class="brand-mark">
+                            <span class="brand-fallback">QT</span>
+                            <img src="{{ asset('images/qtec-logo.png') }}" alt="Qtec logo"
+                                onerror="this.style.display='none'; this.parentElement.classList.add('logo-fallback');">
+                        </div>
+                        <div class="brand-meta">
+                            <strong>Qtec TMS</strong>
+                            <span>Live operations console for planning, tracking, and completion.</span>
+                        </div>
                     </div>
+                </div>
+
+                <div class="stats">
+                    <div class="stat"><strong>{{ $tasks->total() }}</strong><span>Tasks matched</span></div>
+                    <div class="stat"><strong>{{ $activeCount }}</strong><span>Open on this page</span></div>
+                    <div class="stat"><strong>{{ $doneCount }}</strong><span>Completed on this page</span></div>
                 </div>
             </header>
 
@@ -49,7 +61,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h2 class="card-title">{{ $editingTask ? 'Update task' : 'Create task' }}</h2>
-                            <p class="card-subtitle">Use the form below to manage your tasks.</p>
+                            <p class="card-subtitle">Create or refine execution items for your current sprint cycle.</p>
                         </div>
 
                         <div class="card-body">
@@ -63,10 +75,14 @@
 
                             @if ($editingTask)
                                 <div class="edit-banner">
-                                    Editing task #{{ $editingTask->id }}. Update the values and save, or
-                                    <a class="btn-link"
-                                        href="{{ route('task-dashboard.index', request()->except('edit')) }}">cancel
-                                        edit</a>.
+                                    <div class="edit-banner-title">You are editing task #{{ $editingTask->id }}</div>
+                                    <div class="edit-banner-text">
+                                        Review the details below, then click <strong>Update task</strong> to save your
+                                        changes.
+                                    </div>
+                                    <a class="edit-banner-action"
+                                        href="{{ route('task-dashboard.index', request()->except('edit')) }}">Cancel
+                                        edit mode</a>
                                 </div>
                             @endif
 
@@ -139,8 +155,8 @@
                     <div class="card card-spaced">
                         <div class="card-header">
                             <h2 class="card-title">Filters</h2>
-                            <p class="card-subtitle">Refine the list by search, status, priority, dates, sort order, and
-                                page size.</p>
+                            <p class="card-subtitle">Slice the board by delivery status, priority, date window, and sort
+                                logic.</p>
                         </div>
 
                         <div class="card-body filters">
@@ -234,7 +250,8 @@
                             <div class="toolbar">
                                 <div>
                                     <h2 class="card-title">Task list</h2>
-                                    <p class="card-subtitle">Manage tasks with a focused, readable overview.</p>
+                                    <p class="card-subtitle">Operational list for planning, assignment updates, and
+                                        daily follow-up.</p>
                                 </div>
                             </div>
                         </div>
