@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\TaskStatus;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,7 +25,7 @@ class TaskResource extends JsonResource
                 'labelBn' => $this->priority->getLabelBn(),
             ],
             'dueDate' => $this->due_date?->toDateString(),
-            'isOverdue' => $this->due_date?->isPast() && $this->status->getCode() !== 'completed',
+            'isOverdue' => $this->due_date?->isPast() && $this->status !== TaskStatus::COMPLETED,
             'createdAt' => $this->created_at?->toISOString(),
             'updatedAt' => $this->updated_at?->toISOString(),
         ];

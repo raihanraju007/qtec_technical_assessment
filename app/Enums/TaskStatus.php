@@ -17,7 +17,7 @@ enum TaskStatus: int
         };
     }
 
-      public function getLabelBn(): string
+    public function getLabelBn(): string
     {
         return match ($this) {
             self::PENDING => 'মুলতুবি',
