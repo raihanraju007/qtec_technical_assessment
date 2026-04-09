@@ -217,4 +217,4 @@ Main test file:
 
 - GitHub Repository: https://github.com/raihanraju007/qtec_technical_assessment
 - Live Application: (add if deployed)
-- Video Demo: (add Loom link)
+- Video Demo: https://www.loom.com/share/5d7a42c0ebc342839ceb6afe5c50b61c
