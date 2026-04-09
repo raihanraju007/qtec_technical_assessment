@@ -183,6 +183,21 @@ php artisan test
 Main test file:
 - tests/Feature/TaskApiTest.php
 
+## Testing Approach
+
+- Focused on feature testing for core task flows (create, list, update, delete).
+- Verified API behavior using structured JSON responses and route-level checks.
+- Used realistic seed/factory data to simulate normal business usage.
+- Prioritized reliability for main user actions over edge-case-heavy test volume.
+
+## Assumptions & Decisions
+
+- Built API-first because modern frontends (Next.js/Angular/Vue) usually consume APIs.
+- Kept both API and web dashboard so the same backend can serve multiple clients.
+- Used Controller -> Service -> Repository for clean separation and maintainability.
+- Kept create/update validation in separate request classes for clarity.
+- Used audit fields (`created_by`, `updated_by`) via trait for consistent tracking.
+
 ## Notes for Reviewers
 
 - The system follows Controller -> Service -> Repository structure.
