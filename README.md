@@ -30,6 +30,14 @@ Personal background:
 - Blade (server-rendered dashboard)
 - PHPUnit (feature tests)
 
+## UI Preview
+
+Full page UI screenshot for quick review.
+
+![Qtec TMS full page UI screenshot](./full_page_ui_image.png)
+
+The screenshot shows the main dashboard layout, task creation panel, filters, task cards, and status badges in one view. The file name is `full_page_ui_image.png`.
+
 ## Project Structure
 
 ```text
