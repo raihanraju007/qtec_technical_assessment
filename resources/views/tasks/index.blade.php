@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Task Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/qtec-favicon.svg') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=manrope:400,500,600,700|space+grotesk:500,700,800" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=manrope:400,500,600,700|space+grotesk:500,700,800"
+        rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/tasks-dashboard.css') }}">
 
 </head>
