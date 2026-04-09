@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\TaskDashboardController;
+use App\Http\Controllers\Web\TaskDashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/tasks');

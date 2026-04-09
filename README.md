@@ -1,58 +1,197 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Task Management System (Qtec Technical Assessment)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a simple task management system built with Laravel.
+It includes:
+- REST API for task operations
+- Web dashboard for task management
+- Task status tracking (Pending, In Progress, Completed)
+- Filtering, sorting, and pagination
+- Feature tests for core flows
 
-## About Laravel
+## Why I Built API First
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+I intentionally designed this project with a strong API layer.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Reason:
+- Most modern applications use frontend frameworks like Next.js, Angular, and Vue.
+- These frontends consume data from APIs.
+- A clean API makes the system reusable for web, mobile, and future integrations.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Personal background:
+- For the last 2 years, I have mostly worked on API-based backend development.
+- Because of that experience, API design and structured backend logic are my strongest area.
+- For this assessment, I used that strength so judges can easily evaluate my architecture, logic, and reliability approach.
 
-## Learning Laravel
+## Tech Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Laravel 13
+- PHP 8.3
+- MySQL/SQLite
+- Blade (server-rendered dashboard)
+- PHPUnit (feature tests)
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Project Structure
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```text
+qtec_technical_assessment/
+|-- app/
+|   |-- Enums/
+|   |   |-- Messages.php
+|   |   |-- TaskEnums.php
+|   |   |-- TaskPriority.php
+|   |   `-- TaskStatus.php
+|   |-- Http/
+|   |   |-- Controllers/
+|   |   |   |-- Api/
+|   |   |   |   `-- TaskController.php
+|   |   |   `-- Web/
+|   |   |       `-- TaskDashboardController.php
+|   |   |-- Requests/
+|   |   |   `-- Task/
+|   |   |       |-- StoreTaskRequest.php
+|   |   |       `-- UpdateTaskRequest.php
+|   |   `-- Resources/
+|   |       `-- TaskResource.php
+|   |-- Models/
+|   |   |-- Task.php
+|   |   `-- User.php
+|   |-- Repositories/
+|   |   `-- TaskRepository.php
+|   |-- Response/
+|   |   `-- HandleResponse.php
+|   |-- Services/
+|   |   `-- TaskService.php
+|   `-- Traits/
+|       |-- Auditor.php
+|       `-- SnakeCaseValidatedDataTrait.php
+|-- database/
+|   |-- factories/
+|   |   |-- TaskFactory.php
+|   |   `-- UserFactory.php
+|   |-- migrations/
+|   |   |-- 0001_01_01_000000_create_users_table.php
+|   |   |-- 0001_01_01_000001_create_cache_table.php
+|   |   |-- 0001_01_01_000002_create_jobs_table.php
+|   |   `-- 2026_04_09_010000_create_tasks_table.php
+|   `-- seeders/
+|       |-- DatabaseSeeder.php
+|       `-- TaskSeeder.php
+|-- public/
+|   |-- css/
+|   |   `-- tasks-dashboard.css
+|   |-- index.php
+|   `-- robots.txt
+|-- resources/
+|   |-- css/
+|   |   `-- app.css
+|   |-- js/
+|   |   |-- app.js
+|   |   `-- bootstrap.js
+|   `-- views/
+|       `-- tasks/
+|           `-- index.blade.php
+|-- routes/
+|   |-- api.php
+|   |-- console.php
+|   `-- web.php
+|-- tests/
+|   |-- Feature/
+|   |   `-- TaskApiTest.php
+|   |-- Unit/
+|   |   `-- ExampleTest.php
+|   `-- TestCase.php
+|-- README.md
+|-- artisan
+|-- composer.json
+|-- package.json
+`-- phpunit.xml
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Setup
 
-## Contributing
+1. Install dependencies
+```bash
+composer install
+npm install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. Prepare environment
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-## Code of Conduct
+3. Run database
+```bash
+php artisan migrate
+php artisan db:seed
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. Start app
+```bash
+php artisan serve
+```
 
-## Security Vulnerabilities
+## Access
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Dashboard: http://127.0.0.1:8000/tasks
+- API Base: http://127.0.0.1:8000/api/tasks
 
-## License
+## API Endpoints
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- GET /api/tasks
+- POST /api/tasks
+- GET /api/tasks/{id}
+- PUT /api/tasks/{id}
+- DELETE /api/tasks/{id}
+
+### Sample API Response
+
+```json
+{
+	"success": true,
+	"message": "Successfully fetched data.",
+	"data": {
+		"id": 1,
+		"title": "Create assessment API",
+		"description": "Build task CRUD endpoints",
+		"status": {
+			"value": 2,
+			"label": "In Progress",
+			"labelBn": "চলমান"
+		},
+		"priority": {
+			"value": 3,
+			"label": "High",
+			"labelBn": "উচ্চ"
+		},
+		"dueDate": "2026-04-15",
+		"isOverdue": false,
+		"createdAt": "2026-04-10T09:30:00Z",
+		"updatedAt": "2026-04-10T10:45:00Z"
+	}
+}
+```
+
+## Testing
+
+Run tests:
+```bash
+php artisan test
+```
+
+Main test file:
+- tests/Feature/TaskApiTest.php
+
+## Notes for Reviewers
+
+- The system follows Controller -> Service -> Repository structure.
+- Validation is separated for create and update requests.
+- API and dashboard share the same core business logic.
+- Audit fields (`created_by`, `updated_by`) are auto-managed by trait logic.
+
+## Submission Links
+
+- GitHub Repository: https://github.com/raihanraju007/qtec_technical_assessment
+- Live Application: (add if deployed)
+- Video Demo: (add Loom link)
